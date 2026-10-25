@@ -3,6 +3,12 @@ import pandas as pd
 
 from sklearn.model_selection import train_test_split
 
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Load configuration from the project's root directory
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
 
 # Task 1 - Data loading and splitting
 
@@ -59,3 +65,4 @@ def split_data(df, test_size, seed):
         random_state=seed,
         stratify=y
     )
+
