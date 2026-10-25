@@ -6,18 +6,22 @@ from sklearn.metrics import accuracy_score, classification_report
 
 from data_prep import load_data, split_data
 
+import os
+from dotenv import load_dotenv
 
-# Get the path to the project's root directory
+
+# Load configuration from the project's root directory
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
 
-# Set dataset, model and evaluation results paths
-DATA_PATH = BASE_DIR / "data/breast_cancer.csv"
-MODEL_PATH = BASE_DIR / "models/random_forest.joblib"
-RESULTS_PATH = BASE_DIR / "wyniki.txt"
+# Read dataset, model and evaluation results paths
+DATA_PATH = BASE_DIR / os.environ["DATA_PATH"]
+MODEL_PATH = BASE_DIR / os.environ["MODEL_PATH"]
+RESULTS_PATH = BASE_DIR / os.environ["RESULTS_PATH"]
 
-# Use the same data split parameters as in train.py
-TEST_SIZE = 0.2
-SEED_STATE = 23
+# Read the same data split parameters as in train.py
+TEST_SIZE = float(os.environ["TEST_SIZE"])
+SEED_STATE = int(os.environ["RANDOM_SEED"])
 
 
 # Task 3 - Independent model evaluation

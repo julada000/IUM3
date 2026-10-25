@@ -8,18 +8,22 @@ from sklearn.preprocessing import StandardScaler
 
 from data_prep import load_data, split_data
 
+import os
+from dotenv import load_dotenv
 
-# Get the path to the project's root directory
+
+# Load configuration from the project's root directory
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
 
-# Set dataset and model paths
-DATA_PATH = BASE_DIR / "data/breast_cancer.csv"
-MODEL_PATH = BASE_DIR / "models/random_forest.joblib"
+# Read dataset and model paths
+DATA_PATH = BASE_DIR / os.environ["DATA_PATH"]
+MODEL_PATH = BASE_DIR / os.environ["MODEL_PATH"]
 
-# Data split and model parameters
-TEST_SIZE = 0.2
-SEED_STATE = 23
-N_ESTIMATORS = 100
+# Read data split and model parameters
+TEST_SIZE = float(os.environ["TEST_SIZE"])
+SEED_STATE = int(os.environ["RANDOM_SEED"])
+N_ESTIMATORS = int(os.environ["N_ESTIMATORS"])
 
 
 # Task 2 - Model training and saving
